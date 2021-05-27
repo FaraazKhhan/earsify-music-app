@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../assets/svg-icons/logo.svg'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
@@ -13,7 +12,7 @@ const Navbar = () => {
         <nav className="nav-bar">
             <div className="container">
                 <div className="logo__wrapper">
-                    <img src={ logo } alt="logo" />
+                    <h3 className="logo">Earsify</h3>
                     <p>By: <span>FaraazKhhan</span></p>
                 </div>
 

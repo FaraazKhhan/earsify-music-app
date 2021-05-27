@@ -1,3 +1,11 @@
 # Musicify: A music streaming app
 
-> Created on React JS with ViteJS
+- Created with:
+  > React JS over ViteJS
+  > Unofficial JioSaavn API
+
+### Deployed on Netlify
+
+> https://earsify.netlify.com
+
+- PeaceOut ;D

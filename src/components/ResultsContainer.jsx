@@ -5,6 +5,7 @@ const ResultsContainer = () => {
     return ( 
         <div className="results__container">
             <Result />
+            <Result />
         </div>
      );
 }
