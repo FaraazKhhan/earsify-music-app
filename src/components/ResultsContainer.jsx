@@ -6,6 +6,9 @@ const ResultsContainer = () => {
         <div className="results__container">
             <Result />
             <Result />
+            <Result />
+            <Result />
+            <Result />
         </div>
      );
 }
