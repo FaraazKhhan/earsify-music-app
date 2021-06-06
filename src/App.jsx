@@ -1,16 +1,22 @@
-import React from 'react'
+import React from "react";
 
-import Navbar from './components/Navbar'
-import MainBody from './components/MainBody'
+import Navbar from "./components/Navbar";
+import HeroArea from "./components/HeroArea";
+import Searchbar from "./components/Searchbar";
+import SongList from "./components/SongList";
+import { DataProvider } from "./contexts/DataProvider";
 
 function App() {
-
   return (
     <div className="App">
-      <Navbar />
-      <MainBody />
+      <DataProvider>
+        <Navbar />
+        <HeroArea />
+        <Searchbar />
+        <SongList />
+      </DataProvider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
