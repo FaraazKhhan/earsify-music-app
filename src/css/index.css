@@ -167,7 +167,7 @@ body {
 
 .hero-area .title {
   line-height: 2;
-  padding: 2em 0;
+  padding: 1.5em 0;
 }
 
 .hero-area .title .main-title {
@@ -208,20 +208,36 @@ body {
 *   -------------------------------------*/
 .search-bar__container {
   margin: 0 auto;
-  height: 34pt;
+  height: 32pt;
   width: 90%;
   max-width: 400px;
   border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   position: relative;
+}
+
+.search-bar__container span {
+  position: absolute;
+  padding: 0.5em 1em;
+  pointer-events: none;
+  opacity: 0.5;
+  -webkit-transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
+}
+
+.search-bar__container span:active, .search-bar__container span:focus {
+  outline: none;
 }
 
 .search-bar__container input[type="search"] {
@@ -241,8 +257,16 @@ body {
           box-shadow: 0 0px 8px var(--color-active-200);
 }
 
-.search-bar__container input[type="search"]:active + button,
-.search-bar__container input[type="search"]:focus + button {
+.search-bar__container input[type="search"]:active + span,
+.search-bar__container input[type="search"]:focus + span {
+  outline: none;
+  -webkit-transform: translateY(-130%);
+          transform: translateY(-130%);
+  opacity: 1;
+}
+
+.search-bar__container input[type="search"]:active ~ button,
+.search-bar__container input[type="search"]:focus ~ button {
   opacity: 1;
 }
 
@@ -360,12 +384,43 @@ body {
   outline: none;
 }
 
-.song__container audio {
-  height: 30px;
+.song__container .song-btn__container {
   width: 100%;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-column: 1/3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.song__container .toggle-btn {
+  border: none;
+  background-color: royalblue;
+  height: 25pt;
+  width: 25pt;
+  color: white;
+  border-radius: 50%;
+}
+
+.song__container .toggle-btn:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 8px royalblue;
+          box-shadow: 0 0 8px royalblue;
+}
+
+.song__container .toggle-btn:hover, .song__container .toggle-btn:active {
+  background-color: rgba(65, 105, 225, 0.8);
+}
+
+.song__container .toggle-btn:not(:last-of-type) {
+  margin-right: 1em;
 }
 
 .song__container:focus, .song__container:hover, .song__container:active,
@@ -682,6 +737,13 @@ button.active {
   .hero-area .title {
     padding: 0;
   }
+  .search-bar__container input[type="search"]:active + span,
+  .search-bar__container input[type="search"]:focus + span {
+    outline: none;
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+    opacity: 1;
+  }
   .song__container {
     display: -ms-grid;
     display: grid;
@@ -693,7 +755,10 @@ button.active {
         grid-template-rows: auto 20% 30px;
     row-gap: 0.5em;
   }
-  .song__container audio {
+  .song__container .song-btn__container {
     grid-column: unset;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
 }

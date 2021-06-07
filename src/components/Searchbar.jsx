@@ -23,9 +23,10 @@ const Searchbar = () => {
         type="search"
         name="search-bar"
         id="search-bar"
-        placeholder="Song / Artist / Album"
         onChange={handleSearch}
+        autoComplete="off"
       />
+      <span>Search your song:</span>
       <button type="submit">
         <FontAwesomeIcon icon={faSearch} />
       </button>
