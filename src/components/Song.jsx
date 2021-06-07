@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { DataContext } from "../contexts/DataProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown } from "@fortawesome/free-regular-svg-icons";
@@ -10,20 +10,23 @@ const Song = () => {
   const [isPlaying, setPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(null);
 
+  const [activeId, setActiveId] = useState(null);
+
   const audio = useRef(null);
 
   const togglePlay = (e) => {
     const song = e.currentTarget.id;
+    setActiveId(song);
 
     if (currentSong === song) {
       // isPlaying ? audio.current.pause() : audio.current.play();
       if (isPlaying) {
         audio.current.pause();
-        e.currentTarget.classList.remove("active");
+        // e.currentTarget.classList.remove("active");
         console.log(e.currentTarget.classList);
       } else {
         audio.current.play();
-        e.currentTarget.classList.add("active");
+        // e.currentTarget.classList.add("active");
         console.log(e.currentTarget.classList);
       }
       setPlaying(!isPlaying);
@@ -35,6 +38,7 @@ const Song = () => {
       setCurrentSong(song);
       setPlaying(true);
       audio.current = new Audio(song);
+      audio.current.preload = "none";
       audio.current.play();
     }
   };
@@ -45,17 +49,13 @@ const Song = () => {
     setPlaying(false);
   };
 
-  useEffect(() => {
-    if (audio.current) {
-      audio.current.addEventListener("ended", () => setPlaying(false));
-    }
+  // useEffect(() => {
+  //   audio.current.addEventListener("ended", () => setPlaying(false));
 
-    return () => {
-      if (audio.current) {
-        audio.current.removeEventListener("ended", () => setPlaying(false));
-      }
-    };
-  }, []);
+  //   return () => {
+  //     audio.current.removeEventListener("ended", () => setPlaying(false));
+  //   };
+  // }, []);
 
   return (
     <div className="results__container">
@@ -80,7 +80,10 @@ const Song = () => {
             <div className="song-btn__container">
               <button
                 id={item.download_links[0]}
-                className="toggle-btn play__btn"
+                className={
+                  "toggle-btn play__btn " +
+                  (activeId === item.download_links[0] && "active")
+                }
                 onClick={togglePlay}
               >
                 {currentSong !== item.download_links[0] || !isPlaying ? (

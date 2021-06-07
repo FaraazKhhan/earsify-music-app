@@ -225,7 +225,7 @@ body {
         padding: 0.5em 1em;
         pointer-events: none;
 
-        opacity: 0.5;
+        opacity: 0;
 
         transition: transform .2s ease-in-out, opacity .2s ease-in-out;
 
@@ -235,14 +235,14 @@ body {
         }
     }
 
-    input[type="search"] {
+    input[type="input"] {
         height: 32pt;
         width: 100%;
         background-color: transparent;
         border: none;
-        border: 2px solid var(--color-active-400);
-        border-radius: inherit;
-        padding: 0 3.65em 0 1em;
+        border: 0.1rem solid var(--color-active-400);
+        border-radius: 8vh;
+        padding: 0 3.65em 0 3.65em;
 
         color: var(--color-text-200);
 
@@ -258,17 +258,29 @@ body {
             transform: translateY(-130%);
             opacity: 1;
         }
-        &:active ~ button,
-        &:focus ~ button {
+        &:active ~ .search-btn,
+        &:focus ~ .search-btn {
             opacity: 1;
+        }
+        &:active ~ .cancel-btn,
+        &:focus ~ .cancel-btn {
+            opacity: 1;
+            color: rgb(145, 145, 145);
+        }
+        &:active ~ .cancel-btn:hover,
+        &:focus ~ .cancel-btn:hover {
+            color: rgb(255, 42, 60);
+        }
+        &:focus::placeholder {
+            opacity: 0;
+            transition: opacity .1s ease-in-out;
         }
     }
     button {
         position: absolute;
         top: 50%;
-        right: 0;
 
-        transform: translate(-10%, -50%);
+        cursor: pointer;
 
         background-color: transparent;
         border: none;
@@ -284,6 +296,21 @@ body {
         &:focus {
             outline: none;
         }
+    }
+    .search-btn {
+        left: 0;
+        transform: translate(10%, -48%);
+    }
+    .cancel-btn {
+        right: 0;
+        transform: translate(-10%, -50%);
+        opacity: 0;
+        transition: .2s ease;
+        
+        // &:hover,
+        // &:focus {
+            
+        // }
     }
 }
 
@@ -407,6 +434,10 @@ body {
         &:not(:last-of-type) {
             margin-right: 1em;
         }
+    }
+
+    .play__btn {
+        padding-left: 0.2em;
     }
 
     &:focus,
@@ -580,9 +611,10 @@ body {
 }
 
 // ACTIVE CLEASSES
-button.active {
+.toggle-btn.active {
     background: linear-gradient(132deg, var(--color-title-200), var(--color-new));
     color: var(--color-bg-400);
+    padding-left: unset;
 
     background-size: 200%;
     background-position: top left;

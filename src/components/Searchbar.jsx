@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { DataContext } from "../contexts/DataProvider";
 
 const Searchbar = () => {
@@ -20,15 +20,19 @@ const Searchbar = () => {
   return (
     <form onSubmit={handleSubmit} className="search-bar__container">
       <input
-        type="search"
+        type="input"
         name="search-bar"
         id="search-bar"
         onChange={handleSearch}
         autoComplete="off"
+        placeholder="Search your song"
       />
       <span>Search your song:</span>
-      <button type="submit">
+      <button type="submit" className="search-btn">
         <FontAwesomeIcon icon={faSearch} />
+      </button>
+      <button type="reset" defaultValue="Reset" className="cancel-btn">
+        <FontAwesomeIcon icon={faTimesCircle} />
       </button>
     </form>
   );

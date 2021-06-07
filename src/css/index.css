@@ -229,7 +229,7 @@ body {
   position: absolute;
   padding: 0.5em 1em;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0;
   -webkit-transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   transition: transform .2s ease-in-out, opacity .2s ease-in-out;
@@ -240,42 +240,75 @@ body {
   outline: none;
 }
 
-.search-bar__container input[type="search"] {
+.search-bar__container input[type="input"] {
   height: 32pt;
   width: 100%;
   background-color: transparent;
   border: none;
-  border: 2px solid var(--color-active-400);
-  border-radius: inherit;
-  padding: 0 3.65em 0 1em;
+  border: 0.1rem solid var(--color-active-400);
+  border-radius: 8vh;
+  padding: 0 3.65em 0 3.65em;
   color: var(--color-text-200);
 }
 
-.search-bar__container input[type="search"]:active, .search-bar__container input[type="search"]:focus {
+.search-bar__container input[type="input"]:active, .search-bar__container input[type="input"]:focus {
   outline: none;
   -webkit-box-shadow: 0 0px 8px var(--color-active-200);
           box-shadow: 0 0px 8px var(--color-active-200);
 }
 
-.search-bar__container input[type="search"]:active + span,
-.search-bar__container input[type="search"]:focus + span {
+.search-bar__container input[type="input"]:active + span,
+.search-bar__container input[type="input"]:focus + span {
   outline: none;
   -webkit-transform: translateY(-130%);
           transform: translateY(-130%);
   opacity: 1;
 }
 
-.search-bar__container input[type="search"]:active ~ button,
-.search-bar__container input[type="search"]:focus ~ button {
+.search-bar__container input[type="input"]:active ~ .search-btn,
+.search-bar__container input[type="input"]:focus ~ .search-btn {
   opacity: 1;
+}
+
+.search-bar__container input[type="input"]:active ~ .cancel-btn,
+.search-bar__container input[type="input"]:focus ~ .cancel-btn {
+  opacity: 1;
+  color: #919191;
+}
+
+.search-bar__container input[type="input"]:active ~ .cancel-btn:hover,
+.search-bar__container input[type="input"]:focus ~ .cancel-btn:hover {
+  color: #ff2a3c;
+}
+
+.search-bar__container input[type="input"]:focus::-webkit-input-placeholder {
+  opacity: 0;
+  -webkit-transition: opacity .1s ease-in-out;
+  transition: opacity .1s ease-in-out;
+}
+
+.search-bar__container input[type="input"]:focus:-ms-input-placeholder {
+  opacity: 0;
+  -webkit-transition: opacity .1s ease-in-out;
+  transition: opacity .1s ease-in-out;
+}
+
+.search-bar__container input[type="input"]:focus::-ms-input-placeholder {
+  opacity: 0;
+  -webkit-transition: opacity .1s ease-in-out;
+  transition: opacity .1s ease-in-out;
+}
+
+.search-bar__container input[type="input"]:focus::placeholder {
+  opacity: 0;
+  -webkit-transition: opacity .1s ease-in-out;
+  transition: opacity .1s ease-in-out;
 }
 
 .search-bar__container button {
   position: absolute;
   top: 50%;
-  right: 0;
-  -webkit-transform: translate(-10%, -50%);
-          transform: translate(-10%, -50%);
+  cursor: pointer;
   background-color: transparent;
   border: none;
   height: 32pt;
@@ -287,6 +320,21 @@ body {
 
 .search-bar__container button:hover, .search-bar__container button:active, .search-bar__container button:focus {
   outline: none;
+}
+
+.search-bar__container .search-btn {
+  left: 0;
+  -webkit-transform: translate(10%, -48%);
+          transform: translate(10%, -48%);
+}
+
+.search-bar__container .cancel-btn {
+  right: 0;
+  -webkit-transform: translate(-10%, -50%);
+          transform: translate(-10%, -50%);
+  opacity: 0;
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
 }
 
 /*  -------------------------------------
@@ -421,6 +469,10 @@ body {
 
 .song__container .toggle-btn:not(:last-of-type) {
   margin-right: 1em;
+}
+
+.song__container .play__btn {
+  padding-left: 0.2em;
 }
 
 .song__container:focus, .song__container:hover, .song__container:active,
@@ -608,9 +660,10 @@ body {
           animation-delay: 0.4s;
 }
 
-button.active {
+.toggle-btn.active {
   background: linear-gradient(132deg, var(--color-title-200), var(--color-new));
   color: var(--color-bg-400);
+  padding-left: unset;
   background-size: 200%;
   background-position: top left;
   -webkit-animation: button 1.65s ease-in-out infinite;
