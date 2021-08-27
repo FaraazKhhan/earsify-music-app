@@ -1,0 +1,20 @@
+.background-image {
+    background-image: url('../images/2892685.jpg');
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.background-image::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,1));
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bggg {
+    background-color: transparent;
+}
