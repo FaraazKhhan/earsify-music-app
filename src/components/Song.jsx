@@ -61,32 +61,32 @@ const Song = () => {
     <div className="results__container">
       {data &&
         data.map((item) => (
-          <div className="song__container active" key={item.song_id}>
+          <div className="song__container active" key={item.id}>
             <img
-              src={item.song_image}
-              alt={item.song_name}
+              src={item.image}
+              alt={item.title}
               className="song-image"
             />
             <div className="song-info__wrapper">
-              <p className="song-title">{item.song_name}</p>
+              <p className="song-title">{item.title}</p>
               <p className="song-album">
-                {item.album_name} <span className="song-year">{item.year}</span>
+                {item.album} <span className="song-year">{item.more_info.year}</span>
               </p>
-              <p className="song-artist">{item.song_artist}</p>
+              <p className="song-artist">{item.description}</p>
               <button className="song-download-btn">
                 <FontAwesomeIcon icon={faArrowAltCircleDown} />
               </button>
             </div>
             <div className="song-btn__container">
               <button
-                id={item.download_links[0]}
+                id={item.url}
                 className={
                   "toggle-btn play__btn " +
-                  (activeId === item.download_links[0] && "active")
+                  (activeId === item.url && "active")
                 }
                 onClick={togglePlay}
               >
-                {currentSong !== item.download_links[0] || !isPlaying ? (
+                {currentSong !== item.url || !isPlaying ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (
                   <FontAwesomeIcon icon={faPause} />
