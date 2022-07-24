@@ -9,7 +9,7 @@ export const DataProvider = (props) => {
   const fetchData = async () => {
     const encodedQuery = encodeURI(query);
     const response = await fetch(
-      `https://saavn.me/search?song=${encodedQuery}`
+      `https://saavn.me/search/all?query=${encodedQuery}`
     );
     const data = await response.json();
     setData(data);
