@@ -17,7 +17,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="social-icon__wrapper">
-                    <a href="http://www.instagram.com/faraazy" target="_blank" rel="noopener noreferrer">
+                    <a href="http://www.instagram.com/faraazed" target="_blank" rel="noopener noreferrer">
                         <FontAwesomeIcon icon={ faInstagram } />
                     </a>
 
