@@ -334,6 +334,17 @@ body {
     border-radius: 8px;
 }
 
+.results__container2 {
+    min-height: 48vh;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 2em;
+    padding: 1em;
+
+    background-color: var(--color-bg-600);
+    border-radius: 8px;
+}
+
 .song__container {
     display: grid;
     grid-template-columns: 65px auto;
