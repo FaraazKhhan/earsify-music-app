@@ -48,11 +48,6 @@ const Song = () => {
     <div className="results__container">
       {data?.results?.map((item) => (
         <div className="song__container active" key={item.id}>
-          {/* <img
-            src={item.image[1]?.link}
-            alt={item.name}
-            className="song-image"
-          /> */}
           <picture>
               <source media="(min-width: 900px)" srcSet={item.image[2].link} />
               <source media="(min-width: 480px)" srcSet={item.image[1].link} />
