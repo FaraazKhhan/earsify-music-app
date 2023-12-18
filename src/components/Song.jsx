@@ -47,7 +47,7 @@ const Song = () => {
   return (
     <div className="results__container">
       {
-        console.debug("data", data);
+        console.debug("data", data) &&
         data?.results?.map((item) => {
         console.debug("item", item)
         return (
