@@ -46,9 +46,9 @@ const Song = () => {
 
   return (
     <div className="results__container">
-      {data?.results?.map((item) => (
-        {console.debug("data", item)}
-        <div className="song__container active" key={item.id}>
+      {data?.results?.map((item) => {
+        console.debug("data", item)
+        return <div className="song__container active" key={item.id}>
           <picture>
               <source media="(min-width: 900px)" srcSet={item.image[2].link} />
               <source media="(min-width: 480px)" srcSet={item.image[1].link} />
@@ -85,7 +85,7 @@ const Song = () => {
             </button>
           </div>
         </div>
-      ))}
+    })}
     </div>
   );
 };
