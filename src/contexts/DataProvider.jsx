@@ -19,17 +19,17 @@ export const DataProvider = (props) => {
   };
 
   const loadConfigs = async () => {
-    const response = await fetch("/configs/config.json");
-    const configs = await response.json();
-    console.debug({ configs })
-    window.earsifyCore.config = configs;
+    if (!isConfigLoaded) {
+      const response = await fetch("/configs/config.json");
+      const config = await response.json();
+      window.earsifyCore = { config };
+      setConfigLoading(true);
+    }
+    console.debug({ config })
   }
 
   useEffect(() => {
-    if (!isConfigLoaded) {
-      loadConfigs();
-    }
-    fetchData();
+    loadConfigs().then(() => fetchData());
   }, [query]);
 
   return (
