@@ -44,51 +44,57 @@ const Song = () => {
     setPlaying(false);
   };
 
+  const getConfigs = () => {
+    return window.earsifyCore.config;
+  }
+
   return (
     <div className="results__container">
       {
-        console.debug("data", data) && data &&
+        getConfigs() &&
+        console.debug("data", data) &&
+        data &&
         data?.results?.map((item) => {
-        console.debug("item", item)
-        return (
-        <div className="song__container active" key={item.id}>
-          <picture>
-              <source media="(min-width: 900px)" srcSet={item.image[2].link} />
-              <source media="(min-width: 480px)" srcSet={item.image[1].link} />
-              <img src={item.image[0].link} alt={item.name} className="song-image" />
-          </picture>
-          <div className="song-info__wrapper">
-            <p className="song-title">{item.name}</p>
-            <p className="song-album">
-              {item.album?.name}
-            </p>
-            <p className="song-year">{item.year}</p>
-            <p className="song-artist">{item.artist}</p>
-            <button className="song-download-btn">
-              <FontAwesomeIcon icon={faArrowAltCircleDown} />
-            </button>
-          </div>
-          <div className="song-btn__container">
-            <button
-              id={item.downloadUrl[4]?.link}
-              className={
-                "toggle-btn play__btn " +
-                (activeId === item.downloadUrl[4]?.link && "active")
-              }
-              onClick={togglePlay}
-            >
-              {currentSong !== item.downloadUrl[4]?.link || !isPlaying ? (
-                <FontAwesomeIcon icon={faPlay} />
-              ) : (
-                <FontAwesomeIcon icon={faPause} />
-              )}
-            </button>
-            <button className="toggle-btn stop__btn" onClick={stopSong}>
-              <FontAwesomeIcon icon={faStop} />
-            </button>
-          </div>
-        </div>)
-    })}
+          console.debug("item", item)
+          return (
+            <div className="song__container active" key={item.id}>
+              <picture>
+                <source media="(min-width: 900px)" srcSet={item.image[2].link} />
+                <source media="(min-width: 480px)" srcSet={item.image[1].link} />
+                <img src={item.image[0].link} alt={item.name} className="song-image" />
+              </picture>
+              <div className="song-info__wrapper">
+                <p className="song-title">{item.name}</p>
+                <p className="song-album">
+                  {item.album?.name}
+                </p>
+                <p className="song-year">{item.year}</p>
+                <p className="song-artist">{item.artist}</p>
+                <button className="song-download-btn">
+                  <FontAwesomeIcon icon={faArrowAltCircleDown} />
+                </button>
+              </div>
+              <div className="song-btn__container">
+                <button
+                  id={item.downloadUrl[4]?.link}
+                  className={
+                    "toggle-btn play__btn " +
+                    (activeId === item.downloadUrl[4]?.link && "active")
+                  }
+                  onClick={togglePlay}
+                >
+                  {currentSong !== item.downloadUrl[4]?.link || !isPlaying ? (
+                    <FontAwesomeIcon icon={faPlay} />
+                  ) : (
+                    <FontAwesomeIcon icon={faPause} />
+                  )}
+                </button>
+                <button className="toggle-btn stop__btn" onClick={stopSong}>
+                  <FontAwesomeIcon icon={faStop} />
+                </button>
+              </div>
+            </div>)
+        })}
     </div>
   );
 };

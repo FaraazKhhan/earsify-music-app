@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import HeroArea from "./components/HeroArea";
@@ -7,23 +7,13 @@ import { DataProvider } from "./contexts/DataProvider";
 import Song from "./components/Song";
 
 function App() {
-  const [areConfigsLoaded, setConfigsLoading] = useState(false);
-
-  const getConfig = async () => {
-    const configFilePath = "/configs/config.json";
-    const response = await fetch(configFilePath);
-    return await response.json();
-  }
-
   const loadConfigs = async () => {
-    window['earsifyCore']['config'] = await getConfig();
-    setConfigsLoading(true);
+    const response = await fetch("/configs/config.json");
+    window.earsifyCore.config = await response.json();
   }
 
   useEffect(() => {
-    if (!areConfigsLoaded) {
-      loadConfigs();
-    }
+    loadConfigs();
   }, [])
 
   return (
