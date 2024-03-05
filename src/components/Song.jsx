@@ -49,7 +49,7 @@ const Song = () => {
       {
         console.debug("data from api", data) &&
         data &&
-        data.results.map((item) => (
+        data.data.results.map((item) => (
           <div className="song__container active" key={item.id}>
             <picture>
               <source media="(min-width: 900px)" srcSet={item.image[2].link} />
