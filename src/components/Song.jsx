@@ -49,34 +49,34 @@ const Song = () => {
       {
         console.debug("data from api", data) &&
         data &&
-        data.data.results.map((item) => (
-          <div className="song__container active" key={item.id}>
+        data.data.results.map((song, index) => (
+          <div className="song__container active" key={index}>
             <picture>
-              <source media="(min-width: 900px)" srcSet={item.image[2].link} />
-              <source media="(min-width: 480px)" srcSet={item.image[1].link} />
-              <img src={item.image[0].link} alt={item.name} className="song-image" />
+              <source media="(min-width: 900px)" srcSet={song.image[2].link} />
+              <source media="(min-width: 480px)" srcSet={song.image[1].link} />
+              <img src={song.image[0].link} alt={song.name} className="song-image" />
             </picture>
             <div className="song-info__wrapper">
-              <p className="song-title">{item.name}</p>
+              <p className="song-title">{song.name}</p>
               <p className="song-album">
-                {item.album?.name}
+                {song.album?.name}
               </p>
-              <p className="song-year">{item.year}</p>
-              <p className="song-artist">{item.artist}</p>
+              <p className="song-year">{song.year}</p>
+              <p className="song-artist">{song.artist}</p>
               <button className="song-download-btn">
                 <FontAwesomeIcon icon={faArrowAltCircleDown} />
               </button>
             </div>
             <div className="song-btn__container">
               <button
-                id={item.downloadUrl[4]?.link}
+                id={song.downloadUrl[4]?.link}
                 className={
                   "toggle-btn play__btn " +
-                  (activeId === item.downloadUrl[4]?.link && "active")
+                  (activeId === song.downloadUrl[4]?.link && "active")
                 }
                 onClick={togglePlay}
               >
-                {currentSong !== item.downloadUrl[4]?.link || !isPlaying ? (
+                {currentSong !== song.downloadUrl[4]?.link || !isPlaying ? (
                   <FontAwesomeIcon icon={faPlay} />
                 ) : (
                   <FontAwesomeIcon icon={faPause} />
