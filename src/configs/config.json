@@ -1,0 +1,6 @@
+{
+    "musicApiConfig": {
+        "origin": "https://jiosaavn-api-fvrvz.vercel.app",
+        "initialQuery": "hindi"
+    }
+}
