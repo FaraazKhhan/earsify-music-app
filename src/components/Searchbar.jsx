@@ -7,7 +7,7 @@ import { useDebounce } from 'use-debounce';
 const Searchbar = () => {
   const [data, setData, query, setQuery] = useContext(DataContext);
   const [search, setSearch] = useState(null);
-  const [value] = useDebounce(search, 1000);
+  const [value] = useDebounce(search, 1500);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -15,11 +15,11 @@ const Searchbar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuery(search);
+    if (search) setQuery(search);
   };
 
   const handleChange = (e) => {
-    setQuery(value);
+    if (value) setQuery(value);
   }
 
   return (
