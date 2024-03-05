@@ -16,6 +16,7 @@ export const DataProvider = (props) => {
       `${apiOrigin}search/songs?query=${encodedQuery}`
     );
     const data = await response.json();
+    console.debug("Data:: from API", data)
     setData(data);
   };
 
