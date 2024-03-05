@@ -47,9 +47,9 @@ const Song = () => {
   return (
     <div className="results__container">
       {
-        console.debug({ data }) &&
+        console.debug("data from api", data) &&
         data &&
-        data?.results?.map((item) => {
+        data.results.map((item) => {
           console.debug("item", item)
           return (
             <div className="song__container active" key={item.id}>
