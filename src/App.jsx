@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Navbar from "./components/Navbar";
 import HeroArea from "./components/HeroArea";
@@ -7,15 +7,6 @@ import { DataProvider } from "./contexts/DataProvider";
 import Song from "./components/Song";
 
 function App() {
-  const loadConfigs = async () => {
-    const response = await fetch("/configs/config.json");
-    window.earsifyCore.config = await response.json();
-  }
-
-  useEffect(() => {
-    loadConfigs();
-  }, [])
-
   return (
     <div className="App">
       <DataProvider>
