@@ -3,15 +3,8 @@ import React, { useState, useEffect, createContext } from "react";
 export const DataContext = createContext();
 
 export const DataProvider = (props) => {
-  const [areConfigsLoaded, setConfigsLoading] = useState(false);
   const [data, setData] = useState();
-  const [query, setQuery] = useState();
-
-  const getConfig = async () => {
-    const configFilePath = "/configs/config.json";
-    const response = await fetch(configFilePath);
-    return await response.json();
-  }
+  const [query, setQuery] = useState("english");
 
   const fetchData = async () => {
     const { musicApiConfig: { origin = '' } } = window['earsifyCore']['config'];
@@ -24,17 +17,7 @@ export const DataProvider = (props) => {
     setData(data);
   };
 
-  const loadConfigs = async () => {
-    window['earsifyCore']['config'] = await getConfig();
-    const { musicApiConfig: { initialQuery = '' } } = window['earsifyCore']['config'];
-    setQuery(initialQuery);
-    setConfigsLoading(true);
-  }
-
   useEffect(() => {
-    if (!areConfigsLoaded) {
-      loadConfigs();
-    }
     fetchData();
   }, [query]);
 
