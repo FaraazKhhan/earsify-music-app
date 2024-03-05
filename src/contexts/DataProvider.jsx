@@ -23,9 +23,11 @@ export const DataProvider = (props) => {
   };
 
   useEffect(() => {
-    window['earsifyCore']['config'] = await getConfig();
-    const { musicApiConfig: { initialQuery = '' } } = window['earsifyCore']['config'];
-    setQuery(initialQuery);
+    (async () => {
+      window['earsifyCore']['config'] = await getConfig();
+      const { musicApiConfig: { initialQuery = '' } } = window['earsifyCore']['config'];
+      setQuery(initialQuery)
+    })()
   }, []);
 
   useEffect(() => {
