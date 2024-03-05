@@ -3,8 +3,8 @@ import React, { useState, useEffect, createContext } from "react";
 export const DataContext = createContext();
 
 export const DataProvider = (props) => {
-  const [data, setData] = useState(null);
-  const [query, setQuery] = useState(null);
+  const [data, setData] = useState();
+  const [query, setQuery] = useState();
 
   const getConfig = async () => {
     const configFilePath = "/configs/config.json";
