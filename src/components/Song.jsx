@@ -51,7 +51,7 @@ const Song = () => {
         (<div className="results__container">
           {
             data.data.results.map((song, index) => (
-              <div className="song__container active" key={index}>
+              <div className={"song__container " + (activeId === song.downloadUrl[4]?.link && "active")} key={index}>
                 <picture>
                   <source media="(min-width: 900px)" srcSet={song.image[2].link} />
                   <source media="(min-width: 480px)" srcSet={song.image[1].link} />

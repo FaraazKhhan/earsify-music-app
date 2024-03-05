@@ -4,13 +4,13 @@ export const DataContext = createContext();
 
 export const DataProvider = (props) => {
   const [data, setData] = useState();
-  const [query, setQuery] = useState("english");
-  // const [isConfigLoaded, setConfigLoading] = useState(false);
+  const [query, setQuery] = useState(" ");
+  const [isConfigLoaded, setConfigLoading] = useState(false);
 
   const fetchData = async () => {
-    // const { musicApiConfig: { origin = '' } } = window['earsifyCore']['config'];
-    // const apiOrigin = origin.endsWith("/") ? origin : `${origin}/`
-    const apiOrigin = "https://jiosaavn-api-fvrvz.vercel.app/";
+    const { musicApiConfig: { origin = '' } } = window['earsifyCore']['config'];
+    const apiOrigin = origin.endsWith("/") ? origin : `${origin}/`
+    // const apiOrigin = "https://jiosaavn-api-fvrvz.vercel.app/";
     const encodedQuery = encodeURI(query);
     const response = await fetch(
       `${apiOrigin}search/songs?query=${encodedQuery}`
@@ -20,20 +20,19 @@ export const DataProvider = (props) => {
     setData(data);
   };
 
-  // const loadConfigs = async () => {
-  //   let config;
-  //   if (!isConfigLoaded) {
-  //     const response = await fetch("/configs/config.json");
-  //     config = await response.json();
-  //     window.earsifyCore = { config };
-  //     setConfigLoading(true);
-  //   }
-  //   console.debug({ config })
-  // }
+  const loadConfigs = async () => {
+    let config;
+    if (!isConfigLoaded) {
+      const response = await fetch("/configs/config.json");
+      config = await response.json();
+      window.earsifyCore = { config };
+      setConfigLoading(true);
+    }
+    console.debug({ earsifyConfig: config })
+  }
 
   useEffect(() => {
-    // loadConfigs().then(() => fetchData());
-    fetchData();
+    loadConfigs().then(() => fetchData());
   }, [query]);
 
   return (
