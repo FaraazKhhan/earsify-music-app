@@ -44,15 +44,10 @@ const Song = () => {
     setPlaying(false);
   };
 
-  const getConfigs = () => {
-    return window.earsifyCore.config;
-  }
-
   return (
     <div className="results__container">
       {
-        getConfigs() &&
-        console.debug("data", data) &&
+        console.debug({ data }) &&
         data &&
         data?.results?.map((item) => {
           console.debug("item", item)
