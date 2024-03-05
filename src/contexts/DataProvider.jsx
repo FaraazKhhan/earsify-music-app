@@ -19,9 +19,10 @@ export const DataProvider = (props) => {
   };
 
   const loadConfigs = async () => {
+    let config;
     if (!isConfigLoaded) {
       const response = await fetch("/configs/config.json");
-      const config = await response.json();
+      config = await response.json();
       window.earsifyCore = { config };
       setConfigLoading(true);
     }
