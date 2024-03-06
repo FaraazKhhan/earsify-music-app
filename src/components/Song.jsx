@@ -1,47 +1,46 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { DataContext } from "../contexts/DataProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleDown } from "@fortawesome/free-regular-svg-icons";
 import { faPlay, faPause, faStop } from "@fortawesome/free-solid-svg-icons";
 
 const Song = () => {
-  const [data, setData, query, setQuery] = useContext(DataContext);
+  const [
+    data,
+    setCurrentSongPayload,
+    isPlaying,
+    stopAudio,
+    audioRef,
+    playAudio,
+    pauseAudio
+  ] = useContext(DataContext);
+  const [activeSongId, setActiveSongId] = useState(null);
 
-  const [isPlaying, setPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(null);
+  const togglePlay = (song) => {
+    const { link = '' } = song.downloadUrl[4];
+    setActiveSongId(link);
 
-  const [activeId, setActiveId] = useState(null);
-
-  const audio = useRef(null);
-
-  const togglePlay = (e) => {
-    const song = e.currentTarget.id;
-    setActiveId(song);
-
-    if (currentSong === song) {
+    if (activeSongId === link) {
       if (isPlaying) {
-        audio.current.pause();
+        pauseAudio();
       } else {
-        audio.current.play();
+        playAudio();
       }
-      setPlaying(!isPlaying);
     } else {
-      if (audio.current) {
-        audio.current.pause();
+      if (audioRef.current) {
+        pauseAudio();
       }
 
-      setCurrentSong(song);
-      setPlaying(true);
-      audio.current = new Audio(song);
-      audio.current.preload = "none";
-      audio.current.play();
-    }
-  };
+      const payload = {
+        details: song,
+        stream: new Audio(link)
+      }
 
-  const stopSong = () => {
-    audio.current.pause();
-    audio.current.currentTime = 0;
-    setPlaying(false);
+      setCurrentSongPayload(payload);
+      audioRef.current = payload.stream;
+      audioRef.current.preload = "none";
+      playAudio();
+    }
   };
 
   return (
@@ -51,7 +50,7 @@ const Song = () => {
         (<div className="results__container">
           {
             data.data.results.map((song, index) => (
-              <div className={"song__container " + (activeId === song.downloadUrl[4]?.link && "active")} key={index}>
+              <div className={"song__container " + (activeSongId === song.downloadUrl[4]?.link && "active")} key={index}>
                 <picture>
                   <source media="(min-width: 900px)" srcSet={song.image[2].link} />
                   <source media="(min-width: 480px)" srcSet={song.image[1].link} />
@@ -73,11 +72,11 @@ const Song = () => {
                     id={song.downloadUrl[4]?.link}
                     className={
                       "toggle-btn play__btn " +
-                      (activeId === song.downloadUrl[4]?.link && "active")
+                      (activeSongId === song.downloadUrl[4]?.link && "active")
                     }
-                    onClick={togglePlay}
+                    onClick={() => togglePlay(song)}
                   >
-                    {currentSong !== song.downloadUrl[4]?.link || !isPlaying ? (
+                    {activeSongId !== song.downloadUrl[4]?.link || !isPlaying ? (
                       <FontAwesomeIcon icon={faPlay} />
                     ) : (
                       <FontAwesomeIcon icon={faPause} />

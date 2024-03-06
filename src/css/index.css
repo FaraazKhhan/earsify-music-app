@@ -849,3 +849,43 @@ body {
     justify-content: flex-start;
   }
 }
+
+.music-player {
+  background-color: var(--color-bg-400);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.full-screen {
+  height: calc(100vh - var(--nav-bar-height));
+}
+
+.min-screen {
+  height: var(--nav-bar-height);
+}
+
+.display-none {
+  display: none;
+}
+
+.display-block {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}

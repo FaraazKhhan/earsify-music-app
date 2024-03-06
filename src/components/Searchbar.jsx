@@ -5,7 +5,7 @@ import { DataContext } from "../contexts/DataProvider";
 import { useDebounce } from 'use-debounce';
 
 const Searchbar = () => {
-  const [data, setData, query, setQuery] = useContext(DataContext);
+  const [query, setQuery] = useContext(DataContext);
   const [search, setSearch] = useState(null);
   const [value] = useDebounce(search, 1500);
 
